@@ -48,12 +48,52 @@ def add_to_table(table_name='Contacts', cursor=crsr, **kwargs):
     connection.commit()
 
 
+
+def update(linesepvals, table_name='contacts', cursor=crsr):
+    cursor.execute(f'pragma table_info("{table_name}")')
+    cols = [(k[1].lower(), k[2]) for k in cursor.fetchall() if k[4] != 1]
+    pk = cols[0][0]
+    vals = linesepvals.split('|')
+    key = vals[0]
+    print(vals)
+    vals = vals[1:]
+    vals = [k if k != "<br>"  else "null" for k in vals]
+    vals = [k if not k.endswith("<br>") else k[:-4] for k in vals]
+    print(vals)
+    kwords = []
+    for i, (j, k) in enumerate(cols[1:]):
+
+        if vals[i] == "null":
+            kwords.append(j+" = null")
+
+        elif k == 'int':
+            if not (all([l.isdigit() for l in vals[i]]) or vals[i] == "null"):
+                print(j, vals[i])
+                raise ValueError
+
+            fill = vals[i]
+            kwords.append(j+" = "+fill)
+
+        elif k.startswith('varchar'):
+            fill = str(vals[i])
+            fill = "\"" + fill + "\""
+
+            kwords.append(j+" = "+fill)
+
+    kwords = ", ".join(kwords)
+
+    command = f" UPDATE {table_name} SET  {kwords} WHERE {pk} = {key}"
+    print(command)
+    crsr.execute(command)
+    connection.commit()
+
+
+
 def get_all(cursor=crsr, table='Contacts'):
     command = f'''SELECT * FROM {table}'''
     cursor.execute(command)
     rows = cursor.fetchall()
     return rows
-
 
 
 

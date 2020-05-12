@@ -1,7 +1,6 @@
 
 
 body {
-    margin-top: 100px;
     background: #222222;
 }
 .grid-container{
@@ -31,7 +30,7 @@ body {
   /*padding-bottom: 1px;*/
   padding-left: 2px;
   padding-right: 2px;
-  width: 100px;
+  width: 130px;
   height: 20px;
   /*background: rgba(255, 213, 70, 0.4);*/
   border: 2px solid rgba(222, 220, 201, 0.93);
@@ -48,7 +47,7 @@ body {
     /*padding-bottom: 1px;*/
     padding-left: 2px;
     padding-right: 2px;
-    width: 100px;
+    width: 130px;
     height: 20px;
     /*background: rgba(255, 213, 70, 0.4);*/
     border: 2px solid #444444;
@@ -67,7 +66,7 @@ body {
     /*!*padding-bottom: 1px;*!*/
     /*padding-left: 2px;*/
     /*padding-right: 2px;*/
-    width: 100px;
+    width: 130px;
     height: 30px;
     background: transparent;
     /*background: rgba(255, 213, 70, 0.4);*/
@@ -96,4 +95,55 @@ body {
     /*background: rgba(255, 213, 70, 0.4);*/
     border: 2px solid #78a375;
 
+}
+
+
+
+
+.menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #222222;
+  margin-bottom: 20px;
+    /*height: 0px;*/
+}
+
+
+.menuitem {
+    float: left;
+    display: inline-block;
+}
+
+.menuitem:hover .submenu {display: block}
+
+.menulabel {
+    border: 1px solid #ffffff;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px 10px;
+    margin: 4px;
+  text-decoration: none;
+}
+
+
+
+.submenu{
+  position: absolute;
+   /*height: auto;*/
+  display: none;
+}
+
+.submenuitem {
+  display: block;
+}
+
+.submenubutton{
+    display: block !important;
+    padding: 10px;
+    margin: 2px;
+    background: #333333;
+    color: #dddddd;
 }
