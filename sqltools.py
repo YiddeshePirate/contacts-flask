@@ -7,11 +7,13 @@ crsr = connection.cursor()
 
 def add_to_table(table_name='Contacts', cursor=crsr, **kwargs):
     cursor.execute(f'pragma table_info("{table_name}")')
-    """ Get name and type, k[4] is if part of primary key"""
+
+    # Get name and type, k[4] is if part of primary key
+
     cols = [(k[1].lower(), k[2]) for k in cursor.fetchall() if k[4] != 1]
-    """
-    To make sure it matches with the column names make them both lowercase
-    """
+
+    # To make sure it matches with the column names make them both lowercase
+
     kwargs = {k.lower(): kwargs[k] for k in kwargs}
     colslots = []
     col_fills = []
@@ -22,9 +24,9 @@ def add_to_table(table_name='Contacts', cursor=crsr, **kwargs):
             continue
 
         if i[1] == 'int':
-            """
-            It must be passed to sql as a string. remove digits if necessary
-            """
+
+            # It must be passed to sql as a string. remove digits if necessary
+
             if not isinstance(fill, int):
                 fill = ''.join([k for k in fill if k.isdigit()])
             else:
@@ -32,9 +34,9 @@ def add_to_table(table_name='Contacts', cursor=crsr, **kwargs):
 
         elif i[1].startswith('varchar'):
             fill = str(fill)
-            """
-            Need to add quotes to pass to sql as string
-            """
+
+            # Need to add quotes to pass to sql as string
+
             fill = "\"" + fill + "\""
 
         col_fills.append(fill)
@@ -48,7 +50,6 @@ def add_to_table(table_name='Contacts', cursor=crsr, **kwargs):
     connection.commit()
 
 
-
 def update(linesepvals, table_name='contacts', cursor=crsr):
     cursor.execute(f'pragma table_info("{table_name}")')
     cols = [(k[1].lower(), k[2]) for k in cursor.fetchall() if k[4] != 1]
@@ -57,14 +58,14 @@ def update(linesepvals, table_name='contacts', cursor=crsr):
     key = vals[0]
     print(vals)
     vals = vals[1:]
-    vals = [k if k != "<br>"  else "null" for k in vals]
+    vals = [k if k != "<br>" else "null" for k in vals]
     vals = [k if not k.endswith("<br>") else k[:-4] for k in vals]
     print(vals)
     kwords = []
     for i, (j, k) in enumerate(cols[1:]):
 
         if vals[i] == "null":
-            kwords.append(j+" = null")
+            kwords.append(j + " = null")
 
         elif k == 'int':
             if not (all([l.isdigit() for l in vals[i]]) or vals[i] == "null"):
@@ -72,13 +73,13 @@ def update(linesepvals, table_name='contacts', cursor=crsr):
                 raise ValueError
 
             fill = vals[i]
-            kwords.append(j+" = "+fill)
+            kwords.append(j + " = " + fill)
 
         elif k.startswith('varchar'):
             fill = str(vals[i])
             fill = "\"" + fill + "\""
 
-            kwords.append(j+" = "+fill)
+            kwords.append(j + " = " + fill)
 
     kwords = ", ".join(kwords)
 
@@ -88,12 +89,8 @@ def update(linesepvals, table_name='contacts', cursor=crsr):
     connection.commit()
 
 
-
 def get_all(cursor=crsr, table='Contacts'):
     command = f'''SELECT * FROM {table}'''
     cursor.execute(command)
     rows = cursor.fetchall()
     return rows
-
-
-
