@@ -70,7 +70,7 @@ def update(linesepvals, table_name='contacts', cursor=crsr):
         elif k == 'int':
             if not (all([l.isdigit() for l in vals[i]]) or vals[i] == "null"):
                 print(j, vals[i])
-                raise ValueError
+                raise ValueError(f'Column {j} needs an int but has {vals[i]}')
 
             fill = vals[i]
             kwords.append(j + " = " + fill)
@@ -88,9 +88,21 @@ def update(linesepvals, table_name='contacts', cursor=crsr):
     crsr.execute(command)
     connection.commit()
 
+tst = "Bob|marley|Bob The Builde|9099099090|<br>|<br>|<br>|<br>"
+
 
 def get_all(cursor=crsr, table='Contacts'):
     command = f'''SELECT * FROM {table}'''
     cursor.execute(command)
     rows = cursor.fetchall()
     return rows
+
+
+def get_labels(cursor=crsr, table='Contacts'):
+    cursor.execute(f'pragma table_info("{table}")')
+    cols = [k[1] for k in cursor.fetchall()]
+    return cols
+
+
+if __name__ == "__main__":
+    print(get_labels())

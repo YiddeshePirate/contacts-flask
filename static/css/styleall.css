@@ -147,3 +147,17 @@ body {
     background: #333333;
     color: #dddddd;
 }
+
+
+[id$="col4"]{
+    width: 200px;
+}
+
+[id$="col1"]{
+    width: 60px;
+}
+
+
+[id^="labelcol"]{
+    border: none;
+}
