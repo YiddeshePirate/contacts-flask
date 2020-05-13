@@ -7,16 +7,22 @@ app = Flask(__name__)
 @app.route("/")
 def show_all():
     rows = sqltools.get_all()
-    return render_template("all.html", rows=rows)
+    labels = sqltools.get_labels()
+    return render_template("all.html", rows=rows, labels=labels)
 
 
 
 @app.route("/updatecontact", methods=['POST', 'GET'])
 def update_contact():
     if request.method == 'POST':
-        sqltools.update(request.json['msg'])
+        try:
+            sqltools.update(request.json['msg'])
+            return "success", 200
+        except Exception as e:
+            return str(e), 400
 
-    return str(request.form)
+    else:
+        return "hello"
 
 
 

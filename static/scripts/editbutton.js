@@ -51,25 +51,37 @@ function saveclicked(clickedid) {
 }
 
 
+
 function pushtodatabase(key, newvals) {
     var xhttp = new XMLHttpRequest()
-    xhttp.open('POST', 'updatecontact', true);
+    xhttp.open('POST', 'updatecontact');
     newvals.unshift(key);
     var msg = {"msg": newvals.join("|")};
     var msgjson = JSON.stringify(msg)
-    console.log(msgjson)
     xhttp.setRequestHeader("Content-type", 'application/json;charset=UTF-8')
     xhttp.send(msgjson);
+    var result = {"status": null, "text": null};
+    xhttp.addEventListener('load', listenerf.bindArgs(result));
+}
 
+function listenerf(resulta) {
+    resulta.status = this.status
+    resulta.text = this.responseText
+    // console.log(this.status);
+    // console.log(this.responseText);
+    if (resulta.status == 400){
+        alert(resulta.text)
+        location.reload()
+    }
 }
 
 
-//
-// function borderempty() {
-//     // var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
-//     for (const a of document.querySelectorAll("p")) {
-//       if (a.textContent.includes("&nbs")) {
-//         console.log(a.textContent)
-//       }
-// }
-// }
+
+Function.prototype.bindArgs =
+    function (...boundArgs)
+    {
+        const targetFunction = this;
+        return function (...args) { return targetFunction.call(this, ...boundArgs, ...args); };
+    };
+
+
