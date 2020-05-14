@@ -1,9 +1,15 @@
 
 
 function editclicked(clickedid) {
+    document.getElementById('labelcolfilledit').style.display = 'initial';
     // console.log(clickedid)
-    var rownum = clickedid[clickedid.length-1]
-    var elements = document.querySelectorAll(`[id^=row${rownum}col]`)
+    var rownum = clickedid[clickedid.length-1];
+
+
+    var row = document.getElementById(`row${rownum}`);
+    var toprow = row.parentElement.firstChild.nextElementSibling;
+    console.log(toprow, 'toprow');
+    var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
     for (i=1; i<elements.length; ++i){
         elements[i].contentEditable = true;
         elements[i].style.color = "#000000";
@@ -17,14 +23,15 @@ function editclicked(clickedid) {
     // console.log(elements);
     // alert("you clicked "+rownum)
 
-    var editbutton = 'roweditbutton'+rownum;
-    var editbutton = document.getElementById(editbutton);
-    editbutton.style.display = "none";
+    // var editbutton = 'roweditbutton'+rownum;
+    // var editbutton = document.getElementById(editbutton);
+    // editbutton.style.display = "none";
+    changedisplay('roweditbutton', rownum, "none");
+    changedisplay('rowdeletebutton', rownum, "initial");
 
-    var deletebutton = 'rowdeletebutton'+rownum;
-    // console.log(deletebutton);
-    var deletebutton = document.getElementById(deletebutton);
-    deletebutton.style.display = "initial";
+    // var deletebutton = 'rowdeletebutton'+rownum;
+    // var deletebutton = document.getElementById(deletebutton);
+    // deletebutton.style.display = "initial";
 };
 
 
@@ -38,16 +45,22 @@ function saveclicked(clickedid) {
     }
     pushtodatabase(elements[0].innerHTML, newvals)
 
-    var savebutton = 'rowsavebutton'+rownum;
-    var savebutton = document.getElementById(savebutton);
-    savebutton.style.display = "none";
-    var editbutton = 'roweditbutton'+rownum;
-    var editbutton = document.getElementById(editbutton);
-    editbutton.style.display = "initial";
+    document.getElementById('labelcolfilledit').style.display = 'none';
+    // var savebutton = 'rowsavebutton'+rownum;
+    // var savebutton = document.getElementById(savebutton);
+    // savebutton.style.display = "none";
+    //
+    // var editbutton = 'roweditbutton'+rownum;
+    // var editbutton = document.getElementById(editbutton);
+    // editbutton.style.display = "initial";
+    //
+    // var deletebutton = 'rowdeletebutton'+rownum;
+    // var deletebutton = document.getElementById(deletebutton);
+    // deletebutton.style.display = "none";
 
-    var deletebutton = 'rowdeletebutton'+rownum;
-    var deletebutton = document.getElementById(deletebutton);
-    deletebutton.style.display = "none";
+    changedisplay('roweditbutton', rownum, "initial");
+    changedisplay('rowsavebutton', rownum, "none");
+    changedisplay('rowdeletebutton', rownum, "none");
 
     for (i=1; i<elements.length; ++i){
         elements[i].contentEditable = false;
@@ -91,6 +104,7 @@ function listenerf(resulta) {
 
 
 function deleteclicked(clickedid) {
+    document.getElementById('labelcolfilledit').style.display = 'none';
     var rownum = clickedid[clickedid.length-1];
     var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
     var newvals = [];
@@ -102,17 +116,10 @@ function deleteclicked(clickedid) {
     console.log('deleting', elements[0].innerHTML);
     delete_contact(elements[0].innerHTML);
 
+    changedisplay('roweditbutton', rownum, "initial");
+    changedisplay('rowsavebutton', rownum, "none");
+    changedisplay('rowdeletebutton', rownum, "none");
 
-    var savebutton = 'rowsavebutton'+rownum;
-    var savebutton = document.getElementById(savebutton);
-    savebutton.style.display = "none";
-    var editbutton = 'roweditbutton'+rownum;
-    var editbutton = document.getElementById(editbutton);
-    editbutton.style.display = "initial";
-
-    var deletebutton = 'rowdeletebutton'+rownum;
-    var deletebutton = document.getElementById(deletebutton);
-    deletebutton.style.display = "none";
 
     for (i=1; i<elements.length; ++i){
         elements[i].contentEditable = false;
@@ -150,19 +157,8 @@ function new_empty_contact(){
     });
 }
 
-window.onload = function(){
-    var elements = document.querySelectorAll("[id^=row1col]");
-    newvals = []
-    for (i=1; i<elements.length; ++i){
-        newvals.push(elements[i].innerHTML);
-    }
-    for (var i = 0; i< elements.length; i++){
-        if (newvals[i] != "<br>"){
-            return
-        };
-       editclicked('roweditbutton1');
-    }
-}
+// window.onload = function(){
+// }
 
 Function.prototype.bindArgs =
     function (...boundArgs)
@@ -173,3 +169,8 @@ Function.prototype.bindArgs =
 
 
 
+function changedisplay(base, rownum, newdisplay){
+    var button = base + rownum;
+    var button = document.getElementById(button);
+    button.style.display = newdisplay;
+}

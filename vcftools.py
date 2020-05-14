@@ -29,7 +29,7 @@ def process_vcf(vcffile):
                     type_of, number = line.split("=")[1].split(":")
 
                     if fields.get(type_of):
-                        type_of = type_of+"1"
+                        type_of = type_of+"2"
 
                     if number:
                         fields[type_of] = number

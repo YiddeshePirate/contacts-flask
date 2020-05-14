@@ -120,4 +120,31 @@ def delete(contact_id, cursor=crsr, table='Contacts'):
     connection.commit()
 
 
+x = """
+
+    create table Contacts
+    (
+        PersonID integer
+            constraint table_name_pk
+                primary key autoincrement,
+        FIrstname varchar(255),
+        Lastname varchar(255),
+        Displayname varchar(255),
+        Cell int,
+        Cell2 int,
+        Home int,
+        Home2 int,
+        Address varchar(255),
+        City varchar(255),
+        Email varchar(255)
+    );
+
+    """
+    # create unique index table_name_PersonID_uindex
+    #     on table_name (PersonID);
+
+
+# if __name__ == '__main__':
+#     crsr.execute(x)
+#     connection.commit()
 

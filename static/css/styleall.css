@@ -54,49 +54,85 @@ body {
 }
 
 
-.edit-button{
-
-    /*text-align: center;*/
-
+.edit-button {
+    text-align: center;
     color: #7575a3;
-    margin-top: 15px;
     margin-left: 4px;
-    /*margin-right: 4px;*/
-    /*padding-top: 100px;*/
-    /*!*padding-bottom: 1px;*!*/
-    /*padding-left: 2px;*/
-    /*padding-right: 2px;*/
+    margin-right: 4px;
+    padding-top: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
     width: 130px;
-    height: 30px;
-    background: transparent;
-    /*background: rgba(255, 213, 70, 0.4);*/
+    height: 20px;
     border: 2px solid #7575a3;
-
 }
 
-
-
-.save-button{
-    display: none;
+.save-button {
     color: #78a375;
-    margin-top: 15px;
-    margin-left: 8px;
-    width: 100px;
-    height: 30px;
-    background: transparent;
+    text-align: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-top: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 130px;
+    height: 20px;
     border: 2px solid #78a375;
+    display: none;
 }
 
-.delete-button{
-    display: none;
+.delete-button {
     color: #a36363;
-    margin-top: 15px;
-    margin-left: 8px;
-    width: 100px;
-    height: 30px;
-    background: transparent;
+    text-align: center;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-top: 4px;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 130px;
+    height: 20px;
     border: 2px solid #a36363;
+    display: none;
 }
+/*.edit-button{*/
+
+/*    !*text-align: center;*!*/
+
+/*    margin-top: 15px;*/
+/*    margin-left: 4px;*/
+/*    !*margin-right: 4px;*!*/
+/*    !*padding-top: 100px;*!*/
+/*    !*!*padding-bottom: 1px;*!*!*/
+/*    !*padding-left: 2px;*!*/
+/*    !*padding-right: 2px;*!*/
+/*    width: 130px;*/
+/*    height: 30px;*/
+/*    background: transparent;*/
+/*    !*background: rgba(255, 213, 70, 0.4);*!*/
+
+/*}*/
+
+
+
+/*.save-button{*/
+/*    display: none;*/
+/*    margin-top: 15px;*/
+/*    margin-left: 8px;*/
+/*    width: 100px;*/
+/*    height: 30px;*/
+/*    background: transparent;*/
+/*    border: 2px solid #78a375;*/
+/*}*/
+
+/*.delete-button{*/
+/*    display: none;*/
+/*    margin-top: 15px;*/
+/*    margin-left: 8px;*/
+/*    width: 100px;*/
+/*    height: 30px;*/
+/*    background: transparent;*/
+/*    border: 2px solid #a36363;*/
+/*}*/
 
 
 
