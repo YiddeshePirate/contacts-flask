@@ -134,13 +134,14 @@ body {
   position: absolute;
    /*height: auto;*/
   display: none;
+    list-style: none;
 }
 
-.submenuitem {
+.submenuitemtool {
   display: block;
 }
 
-.submenubutton{
+.submenubuttontool{
     display: block !important;
     padding: 10px;
     margin: 2px;
@@ -160,4 +161,38 @@ body {
 
 [id^="labelcol"]{
     border: none;
+}
+
+
+.submenuitemlabel{
+    display: block;
+}
+
+
+/*.submenuitemtext{*/
+/*    !*display: block !important;*!*/
+/*    !*padding: 10px;*!*/
+/*    !*margin: 2px;*!*/
+/*    !*background: #333333;*!*/
+/*    color: #dddddd;*/
+/*}*/
+
+.submenushowitem{
+    display: block;
+    justify-content: start;
+    padding-bottom: 6px;
+    padding-top:6px;
+}
+
+.showcheckboxlabel{
+    color: #dddddd;
+}
+
+.submenushow{
+    border: 2px solid #ffffff;
+    background: #222222;
+    width: 150px;
+}
+
+.submenushowcheckbox{
 }

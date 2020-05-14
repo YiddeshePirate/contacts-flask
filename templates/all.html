@@ -10,23 +10,26 @@
 <ul class="menu">
   <li class="menuitem"><p class="menulabel">Tools</p>
       <ul class="submenu">
-          <li class="submenuitem"><button class="submenubutton" onclick="location.href = 'newcontact';">Tool1</button></li>
-          <li class="submenuitem"><button class="submenubutton">Tool2</button></li>
-          <li class="submenuitem"><button class="submenubutton">Tool3</button></li>
+          <li class="submenuitemtool"><button class="submenubuttontool">Tool1</button></li>
+          <li class="submenuitemtool"><button class="submenubuttontool">Tool2</button></li>
+          <li class="submenuitemtool"><button class="submenubuttontool">Tool3</button></li>
       </ul>
   </li>
   <li class="menuitem" onclick="new_empty_contact()"><p class="menulabel">New Contact</p></li>
+  <li class="menuitem"><p class="menulabel">Show</p>
+      <ul class="submenushow submenu">
+          {% for i in labels %}
+          <li class="submenushowitem" id="{{i}}showitem"><label class="showcheckboxlabel" id="{{i}}showcheckboxlabel}}"><input type="checkbox" class="submenushowcheckbox" id="{{loop.index}}showcheckbox" onclick="checkbox_clicked(this)"></input>{{i}}</label></li>
+          {% endfor %}
+      </ul>
+  </li>
 </ul>
 <div class="grid-container">
     <div id=labelrow class="contact-row">
     {% for k in labels %}
-<<<<<<< HEAD
         <p contenteditable="false" id=labelcol{{loop.index}} class="actual-box-content" onclick="sql_sort(this.innerHTML)">{{k}}</p>
 
 
-=======
-        <p contenteditable="false" id=labelcol{{loop.index}} class="actual-box-content">{{k}}</p>
->>>>>>> 58bb677287715952e67ac03ba205db3e89d9601e
     {% endfor %}
     </div>
 
@@ -49,6 +52,7 @@
 </div>
 {% block javascript %}
     <script src="{{ url_for('static',filename='scripts/editbutton.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/show.js') }}"></script>
 {% endblock %}
 </body>
 </html>
