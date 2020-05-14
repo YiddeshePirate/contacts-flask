@@ -2,7 +2,6 @@
 
 function editclicked(clickedid) {
     document.getElementById('labelcolfilledit').style.display = 'initial';
-    // console.log(clickedid)
     var rownum = clickedid[clickedid.length-1];
 
     var row = document.getElementById(`row${rownum}`);
@@ -14,23 +13,11 @@ function editclicked(clickedid) {
         elements[i].style.color = "#000000";
         elements[i].style.background = "#EEEEEE";
     }
-    var savebutton = 'rowsavebutton'+rownum;
-    console.log(savebutton);
-    // console.log(savebutton);
-    var savebutton = document.getElementById(savebutton);
-    savebutton.style.display = "initial";
-    // console.log(elements);
-    // alert("you clicked "+rownum)
 
-    // var editbutton = 'roweditbutton'+rownum;
-    // var editbutton = document.getElementById(editbutton);
-    // editbutton.style.display = "none";
     changedisplay('roweditbutton', rownum, "none");
     changedisplay('rowdeletebutton', rownum, "initial");
+    changedisplay('rowsavebutton', rownum, "initial");
 
-    // var deletebutton = 'rowdeletebutton'+rownum;
-    // var deletebutton = document.getElementById(deletebutton);
-    // deletebutton.style.display = "initial";
 };
 
 
@@ -45,17 +32,6 @@ function saveclicked(clickedid) {
     pushtodatabase(elements[0].innerHTML, newvals)
 
     document.getElementById('labelcolfilledit').style.display = 'none';
-    // var savebutton = 'rowsavebutton'+rownum;
-    // var savebutton = document.getElementById(savebutton);
-    // savebutton.style.display = "none";
-    //
-    // var editbutton = 'roweditbutton'+rownum;
-    // var editbutton = document.getElementById(editbutton);
-    // editbutton.style.display = "initial";
-    //
-    // var deletebutton = 'rowdeletebutton'+rownum;
-    // var deletebutton = document.getElementById(deletebutton);
-    // deletebutton.style.display = "none";
 
     changedisplay('roweditbutton', rownum, "initial");
     changedisplay('rowsavebutton', rownum, "none");
@@ -156,8 +132,6 @@ function new_empty_contact(){
     });
 }
 
-// window.onload = function(){
-// }
 
 Function.prototype.bindArgs =
     function (...boundArgs)

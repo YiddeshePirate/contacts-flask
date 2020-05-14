@@ -46,7 +46,6 @@ function show_col(boxid) {
 
 
 function checkbox_clicked(box) {
-    // var checkBox = document.getElementById(box_id);
     if (box.checked == true){
         console.log(box.id[0])
         console.log("is checked")
