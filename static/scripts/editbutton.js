@@ -2,8 +2,7 @@
 
 function editclicked(clickedid) {
     document.getElementById('labelcolfilledit').style.display = 'initial';
-    var rownum = clickedid[clickedid.length-1];
-
+    var rownum = clickedid.match(/\d+$/)[0];
     var row = document.getElementById(`row${rownum}`);
     var toprow = row.parentElement.firstChild.nextElementSibling;
     console.log(toprow, 'toprow');
@@ -44,10 +43,10 @@ function saveclicked(clickedid) {
         elements[i].style.background = null;
         if (elements[i].innerHTML !== "<br>"){
 
-            elements[i].style.border = "2px solid rgba(222, 220, 201, 0.93)";
+            elements[i].style.border = "1px solid rgba(222, 220, 201, 0.93)";
 
         }else{
-            elements[i].style.border = "2px solid #444444";
+            elements[i].style.border = "1px solid #444444";
         }
 
     }
@@ -78,48 +77,21 @@ function listenerf(resulta) {
 
 
 
-function deleteclicked(clickedid) {
-    document.getElementById('labelcolfilledit').style.display = 'none';
+function delete_contact(clickedid) {
     var rownum = clickedid.match(/\d+$/)[0];
-    var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
-    var newvals = [];
-
-    for (i=1; i<elements.length; ++i){
-        newvals.push(elements[i].innerHTML);
-    }
-
-    console.log('deleting', elements[0].innerHTML);
-    delete_contact(elements[0].innerHTML);
-
     changedisplay('roweditbutton', rownum, "initial");
     changedisplay('rowsavebutton', rownum, "none");
     changedisplay('rowdeletebutton', rownum, "none");
-
-
-    for (i=1; i<elements.length; ++i){
-        elements[i].contentEditable = false;
-
-        elements[i].style.color = null;
-        elements[i].style.background = null;
-        if (elements[i].innerHTML !== "<br>"){
-
-            elements[i].style.border = "2px solid rgba(222, 220, 201, 0.93)";
-
-        }else{
-            elements[i].style.border = "2px solid #444444";
-        }
-
-    }
-}
-
-function delete_contact(idnum) {
-    var xhttp = new XMLHttpRequest()
+    var idnum = document.getElementById("row"+rownum+"col1").innerHTML;
+    var xhttp = new XMLHttpRequest();
     xhttp.open('POST', 'deletecontact');
     var msg = {"msg": idnum};
     var msgjson = JSON.stringify(msg)
     xhttp.setRequestHeader("Content-type", 'application/json;charset=UTF-8')
     xhttp.send(msgjson);
-    xhttp.addEventListener('load', function(){location.reload()});
+    xhttp.addEventListener('load', function(){
+        document.getElementById('row'+rownum).style.display = "none";
+    });
 }
 
 function new_empty_contact(){
