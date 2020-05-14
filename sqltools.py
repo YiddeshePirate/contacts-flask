@@ -1,5 +1,7 @@
 import sqlite3
 
+#TODO !important figure outo how to deal with multiple phone numbers
+
 connection = sqlite3.connect("contacts.db", check_same_thread=False)
 
 crsr = connection.cursor()
@@ -91,8 +93,8 @@ def update(linesepvals, table_name='contacts', cursor=crsr):
 tst = "Bob|marley|Bob The Builde|9099099090|<br>|<br>|<br>|<br>"
 
 
-def get_all(cursor=crsr, table='Contacts'):
-    command = f'''SELECT * FROM {table}'''
+def get_all(cursor=crsr, table='Contacts', order_by='PersonID'):
+    command = f'''SELECT * FROM {table} ORDER BY {order_by} DESC'''
     cursor.execute(command)
     rows = cursor.fetchall()
     return rows
@@ -103,6 +105,24 @@ def get_labels(cursor=crsr, table='Contacts'):
     cols = [k[1] for k in cursor.fetchall()]
     return cols
 
+#todo add add_vcf_to_database function
+
+def create_empty(cursor=crsr, table='Contacts'):
+    command = f'INSERT INTO {table} DEFAULT VALUES'
+    cursor.execute(command)
+    print("added new")
+    connection.commit()
+
+def delete(contact_id, cursor=crsr, table='Contacts'):
+    command = f'DELETE FROM {table} WHERE PersonId = {contact_id}'
+    cursor.execute(command)
+    print(f"deleted {contact_id}")
+    connection.commit()
+
+
+
 
 if __name__ == "__main__":
-    print(get_labels())
+
+    create_empty()
+
