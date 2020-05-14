@@ -1,7 +1,12 @@
+from addrformatter import format_address
+from time import sleep
 
 
 
 def process_vcf(vcffile):
+    failed = 0
+    success = 0
+
     rslt = []
     with open(vcffile, 'rt', encoding='utf8') as f:
         contacts = [i for i in f.read().split("BEGIN")]
@@ -38,13 +43,18 @@ def process_vcf(vcffile):
                     type_of = 'CELL'
                     number = line.split(":")[1]
 
+            elif line.startswith('ADR'):
+                try:
+                    addr = " ".join(list(filter(None, line.split(":")[1].split(";"))))
+                    addr = format_address(addr)
+                    print(addr)
+                    if addr[-1] == 'USA' and len(addr) >= 3:
+                        fields['City'] = addr[-3]
+                        fields['Address'] = addr[-4]
+                except Exception as e:
+                    pass
+
+
         rslt.append(fields)
-    print(rslt)
+    return rslt
 
-
-
-
-
-
-process_vcf('fullshloima.vcf')
-process_vcf("contacts.vcf")

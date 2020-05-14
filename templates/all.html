@@ -27,7 +27,7 @@
 <table id="completetable" class="grid-container">
     <tr id=labelrow class="contact-row">
     {% for k in labels %}
-        <th contenteditable="false" id=labelcol{{loop.index}} class="actual-box-content" onclick="sql_sort(this.innerHTML)">{{k}}</th>
+        <th contenteditable="false" id=labelcol{{loop.index}} class="actual-box-content" onclick="sortTable(this.id)">{{k}}</th>
     {% endfor %}
         <th contenteditable="false" id=labelcolfill class="actual-box-content" style="visibility: hidden">filler</th>
         <th contenteditable="false" id=labelcolfilledit class="actual-box-content" style="visibility: hidden; display: none">filler</th>

@@ -5,7 +5,6 @@ function editclicked(clickedid) {
     // console.log(clickedid)
     var rownum = clickedid[clickedid.length-1];
 
-
     var row = document.getElementById(`row${rownum}`);
     var toprow = row.parentElement.firstChild.nextElementSibling;
     console.log(toprow, 'toprow');
@@ -36,7 +35,7 @@ function editclicked(clickedid) {
 
 
 function saveclicked(clickedid) {
-    var rownum = clickedid[clickedid.length-1];
+    var rownum = clickedid.match(/\d+$/)[0];
     var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
     var newvals = [];
 
@@ -105,7 +104,7 @@ function listenerf(resulta) {
 
 function deleteclicked(clickedid) {
     document.getElementById('labelcolfilledit').style.display = 'none';
-    var rownum = clickedid[clickedid.length-1];
+    var rownum = clickedid.match(/\d+$/)[0];
     var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
     var newvals = [];
 

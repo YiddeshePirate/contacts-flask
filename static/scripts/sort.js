@@ -1,10 +1,11 @@
 
 
-sortTable(3)
 
 
 
 function sortTable(n) {
+  var n = n.match(/\d+$/)[0]-1;
+  console.log(n);
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("completetable");
   switching = true;

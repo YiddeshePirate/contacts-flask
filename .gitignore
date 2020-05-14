@@ -5,3 +5,5 @@ sqlsnippets.md
 *.vcf 
 contacts.db 
 scratch.py 
+*.swp 
+*.swo 
