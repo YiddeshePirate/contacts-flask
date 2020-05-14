@@ -1,5 +1,6 @@
 from flask import *
 import sqltools
+import time
 
 app = Flask(__name__)
 
@@ -25,6 +26,24 @@ def update_contact():
         return "hello"
 
 
+@app.route("/newcontact", methods=['POST', 'GET'])
+def new_contact():
+    if request.method == 'POST':
+        sqltools.create_empty()
+        print("yo")
+        return "yo yourself"
+
+@app.route("/deletecontact", methods=['POST', 'GET'])
+def delete_contact():
+    if request.method == 'POST':
+        sqltools.delete(request.json['msg'])
+        return "yo yourself"
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5001, debug=True)
+
+
+
+#todo implement upload vcf route
+
+
