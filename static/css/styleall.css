@@ -77,26 +77,26 @@ body {
 
 
 .save-button{
-
-    /*text-align: center;*/
-
     display: none;
     color: #78a375;
     margin-top: 15px;
     margin-left: 8px;
-    /*margin-right: 4px;*/
-    /*padding-top: 100px;*/
-    /*!*padding-bottom: 1px;*!*/
-    /*padding-left: 2px;*/
-    /*padding-right: 2px;*/
     width: 100px;
     height: 30px;
     background: transparent;
-    /*background: rgba(255, 213, 70, 0.4);*/
     border: 2px solid #78a375;
-
 }
 
+.delete-button{
+    display: none;
+    color: #a36363;
+    margin-top: 15px;
+    margin-left: 8px;
+    width: 100px;
+    height: 30px;
+    background: transparent;
+    border: 2px solid #a36363;
+}
 
 
 
