@@ -1,8 +1,10 @@
 import requests
 import json
+import os
 
 
-key = "AIzaSyD550XZuuZ1kQbLeaIWuHrR8mSBkHG9m0w"
+key = os.environ['DISTANCE_API_KEY']
+
 
 
 
