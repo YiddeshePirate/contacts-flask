@@ -1,7 +1,6 @@
-import sqlite3
 from vcftools import process_vcf
+import sqlite3
 
-#TODO !important figure outo how to deal with multiple phone numbers
 
 connection = sqlite3.connect("contacts.db", check_same_thread=False)
 
@@ -120,40 +119,81 @@ def delete(contact_id, cursor=crsr, table='Contacts'):
     print(f"deleted {contact_id}")
     connection.commit()
 
-def addfromvcf(filepath, cursor=crsr, table='Contacts'):
+
+def createfromvcf(filepath, table, cursor=crsr):
+    create_table(table)
     all_c = process_vcf(filepath)
+    print(all_c)
     for i in all_c:
         try:
-            add_to_table(**i)
+            add_to_table(table_name=table, **i)
         except Exception as e:
             print(e)
 
-
-x = """
-
-    create table Contacts
-    (
-        PersonID integer
-            constraint table_name_pk
-                primary key autoincrement,
-        FIrstname varchar(255),
-        Lastname varchar(255),
-        Displayname varchar(255),
-        Cell int,
-        Cell2 int,
-        Home int,
-        Home2 int,
-        Address varchar(255),
-        City varchar(255),
-        Email varchar(255)
-    );
-
-    """
-    # create unique index table_name_PersonID_uindex
-    #     on table_name (PersonID);
+    return get_all(table=table)
 
 
-# if __name__ == '__main__':
-#     crsr.execute(x)
-#     connection.commit()
+def create_table(name):
+
+    cmd1 = f"""
+        create table {name}
+        (
+            PersonId integer
+                constraint {name}_pk
+                    primary key autoincrement,
+            Firstname varchar(255),
+            Lastname varchar(255),
+            Displayname varchar(255) not null,
+            Cell int,
+            Home int,
+            Work int,
+            Cell2 int,
+            Home2 int,
+            Work2 int,
+            Groups varchar(255),
+            Address varchar(255),
+            City varchar(255)
+        );
+       """
+
+    cmd2 = f"""
+
+            create unique index {name}_PersonId_uindex
+                on {name} (PersonId);
+            """
+
+    crsr.execute(cmd1)
+    crsr.execute(cmd2)
+    connection.commit()
+
+def drop_temp():
+    try:
+        command = f'DROP TABLE temp'
+        crsr.execute(command)
+        connection.commit()
+    except Exception as e:
+        print(e)
+
+def merge_temp(table='Contacts'):
+
+    crsr.execute(f'pragma table_info("{table}")')
+    cols = [k[1] for k in crsr.fetchall() if k[-1] != 1]
+    cols = ", ".join(cols)
+    command = f"""
+            INSERT INTO  {table} ({cols})
+            SELECT {cols}
+            FROM temp  
+              """
+    print(command)
+    crsr.execute(command)
+    connection.commit()
+
+def clear_all(table='Contacts'):
+    command = f'DELETE FROM {table} WHERE 1 = 1'
+    crsr.execute(command)
+    connection.commit()
+
+if __name__ == '__main__':
+    clear_all()
+
 

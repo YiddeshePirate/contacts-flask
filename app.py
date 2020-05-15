@@ -1,4 +1,5 @@
 from flask import *
+import vcftools
 import sqltools
 import time
 import tempfile
@@ -23,7 +24,8 @@ def show_all():
 def update_contact():
     if request.method == 'POST':
         try:
-            sqltools.update(request.json['msg'])
+            print(request.json['table'])
+            sqltools.update(request.json['msg'], table_name=request.json['table'])
             return "success", 200
         except Exception as e:
             return str(e), 400
@@ -42,23 +44,32 @@ def new_contact():
 @app.route("/deletecontact", methods=['POST', 'GET'])
 def delete_contact():
     if request.method == 'POST':
-        sqltools.delete(request.json['msg'])
+        sqltools.delete(request.json['msg'], table=request.json['table'])
         return "yo yourself"
 
 @app.route("/uploadvcf", methods=['POST', 'GET'])
 def upload_vcf():
     if request.method == 'POST':
         vcfile = request.files['file']
-        print(vcfile.filename)
-        vcfile.save(os.path.join(tmpdir.name, vcfile.filename))
-        return redirect(url_for("import_vcf", filename=vcfile.filename))
+        name = str(int(time.time()))
+        vcfile.save(os.path.join(tmpdir.name, name))
+        return redirect(url_for("import_vcf", filename=os.path.join(tmpdir.name, name)))
 
     return render_template("uploadvcf.html")
 
 @app.route("/importvcf", methods=['POST', 'GET'])
 def import_vcf():
+    sqltools.drop_temp()
     vcffilename = request.args['filename']
-    proccesedvcf = sqltools.process_vcf(vcffilename)
+    labels = sqltools.get_labels()
+    rows = sqltools.createfromvcf(vcffilename, 'temp')
+    return render_template("importvcf.html", rows=rows, labels=labels)
+
+
+@app.route("/mergevcf", methods=['POST'])
+def merge():
+    sqltools.merge_temp()
+    return 'yay', 400
 
 
 if __name__ == '__main__':
@@ -66,5 +77,5 @@ if __name__ == '__main__':
 
 
 
-#todo implement upload vcf route
+# todo implement upload vcf route
 

@@ -24,7 +24,7 @@ function editclicked(clickedid) {
 };
 
 
-function saveclicked(clickedid) {
+function saveclicked(clickedid, table_name) {
     var rownum = clickedid.match(/\d+$/)[0];
     var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
 
@@ -33,7 +33,7 @@ function saveclicked(clickedid) {
     for (i=1; i<elements.length; ++i){
         newvals.push(elements[i].innerHTML);
     }
-    pushtodatabase(elements[0].innerHTML, newvals)
+    pushtodatabase(elements[0].innerHTML, newvals, table_name)
 
     document.getElementById('labelcolfilledit').style.display = 'none';
 
@@ -59,11 +59,11 @@ function saveclicked(clickedid) {
 
 
 
-function pushtodatabase(key, newvals) {
+function pushtodatabase(key, newvals, table_name) {
     var xhttp = new XMLHttpRequest()
     xhttp.open('POST', 'updatecontact');
     newvals.unshift(key);
-    var msg = {"msg": newvals.join("|")};
+    var msg = {"msg": newvals.join("|"), 'table': table_name};
     var msgjson = JSON.stringify(msg)
     xhttp.setRequestHeader("Content-type", 'application/json;charset=UTF-8')
     xhttp.send(msgjson);
@@ -82,7 +82,7 @@ function listenerf(resulta) {
 
 
 
-function delete_contact(clickedid) {
+function delete_contact(clickedid, table_name) {
     var rownum = clickedid.match(/\d+$/)[0];
     changedisplay('roweditbutton', rownum, "initial");
     changedisplay('rowsavebutton', rownum, "none");
@@ -90,7 +90,7 @@ function delete_contact(clickedid) {
     var idnum = document.getElementById("row"+rownum+"col1").innerHTML;
     var xhttp = new XMLHttpRequest();
     xhttp.open('POST', 'deletecontact');
-    var msg = {"msg": idnum};
+    var msg = {"msg": idnum, "table": table_name};
     var msgjson = JSON.stringify(msg)
     xhttp.setRequestHeader("Content-type", 'application/json;charset=UTF-8')
     xhttp.send(msgjson);

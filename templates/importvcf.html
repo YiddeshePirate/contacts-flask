@@ -7,23 +7,12 @@
     <title>All</title>
 </head>
 <body>
+
 <ul class="menu">
-  <li class="menuitem"><p class="menulabel">Tools</p>
-      <ul class="submenu">
-          <li class="submenuitemtool"><button onclick="window.location.replace('uploadvcf')" class="submenubuttontool">Import vcf</button></li>
-          <li class="submenuitemtool"><button class="submenubuttontool">Tool2</button></li>
-          <li class="submenuitemtool"><button class="submenubuttontool">Tool3</button></li>
-      </ul>
-  </li>
-  <li class="menuitem" onclick="new_empty_contact()"><p class="menulabel">New Contact</p></li>
-  <li class="menuitem"><p class="menulabel">Show</p>
-      <ul class="submenushow submenu">
-          {% for i in labels %}
-          <li class="submenushowitem" id="{{i}}showitem"><label class="showcheckboxlabel" id="{{i}}showcheckboxlabel}}"><input checked type="checkbox" class="submenushowcheckbox" id="{{loop.index}}showcheckbox" onclick="checkbox_clicked(this)"></input>{{i}}</label></li>
-          {% endfor %}
-      </ul>
-  </li>
+  <li class="menuitem" onclick="merge_vcf()"><p class="menulabel">Import</p></li>
+  <li class="menuitem" onclick="window.location.replace('/')"><p class="menulabel">Cancel</p></li>
 </ul>
+
 <table id="completetable" class="grid-container">
     <tr id=labelrow class="contact-row">
     {% for k in labels %}
@@ -43,8 +32,8 @@
         {% endif %}
         {% endfor %}
             <td id=roweditbutton{{loop.index}} class="edit-button" type="button" onclick="editclicked(this.id)">edit</td>
-            <td id=rowsavebutton{{loop.index}} class="save-button" type="button" onclick="saveclicked(this.id, 'Contacts')">save</td>
-            <td id=rowdeletebutton{{loop.index}} class="delete-button" type="button" onclick="delete_contact(this.id, 'Contacts')">delete</td>
+            <td id=rowsavebutton{{loop.index}} class="save-button" type="button" onclick="saveclicked(this.id, 'temp')">save</td>
+            <td id=rowdeletebutton{{loop.index}} class="delete-button" type="button" onclick="delete_contact(this.id, 'temp')">delete</td>
     </tr>
     {% endfor %}
 </table>
@@ -52,6 +41,7 @@
     <script src="{{ url_for('static',filename='scripts/editbutton.js') }}"></script>
     <script src="{{ url_for('static',filename='scripts/show.js') }}"></script>
     <script src="{{ url_for('static',filename='scripts/sort.js') }}"></script>
+<script src="{{ url_for('static',filename='scripts/importvcf.js') }}"></script>
 {% endblock %}
 </body>
 </html>
