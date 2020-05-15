@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/styleupload.css') }}">
+    <title>Import vcf</title>
+</head>
+<body>
+<!--<h2>Upload Vcf Here<h2>-->
+<form method="POST" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".vcf">
+  <p>Drag your .vcf files here or click in this area.</p>
+  <button type="submit">Upload</button>
+</form>
+</body>
+
+
+
+<script src="{{ url_for('static',filename='scripts/jquery.js') }}"></script>
+<script>
+$(document).ready(function(){
+    $('form input').change(function () {
+        $('form p').text(this.files[0].name + " selected");
+        console.log(this.files);
+    });
+});
+</script>
+</html>

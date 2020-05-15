@@ -3,9 +3,13 @@
 function editclicked(clickedid) {
     document.getElementById('labelcolfilledit').style.display = 'initial';
     var rownum = clickedid.match(/\d+$/)[0];
-    var row = document.getElementById(`row${rownum}`);
-    var toprow = row.parentElement.firstChild.nextElementSibling;
-    console.log(toprow, 'toprow');
+
+    //todo decide if move to top when editing
+
+    // var row = document.getElementById(`row${rownum}`);
+    // var toprow = row.parentElement.firstChild.nextElementSibling;
+    // console.log(toprow, 'toprow');
+
     var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
     for (i=1; i<elements.length; ++i){
         elements[i].contentEditable = true;
@@ -23,6 +27,7 @@ function editclicked(clickedid) {
 function saveclicked(clickedid) {
     var rownum = clickedid.match(/\d+$/)[0];
     var elements = document.querySelectorAll(`[id^=row${rownum}col]`);
+
     var newvals = [];
 
     for (i=1; i<elements.length; ++i){

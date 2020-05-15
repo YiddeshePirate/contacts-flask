@@ -120,11 +120,11 @@ def delete(contact_id, cursor=crsr, table='Contacts'):
     print(f"deleted {contact_id}")
     connection.commit()
 
-def addfromvcf(filewrapper, cursor=crsr, table='Contacts'):
-    all_c = process_vcf(filewrapper)
+def addfromvcf(filepath, cursor=crsr, table='Contacts'):
+    all_c = process_vcf(filepath)
     for i in all_c:
         try:
-            add_to_table(i)
+            add_to_table(**i)
         except Exception as e:
             print(e)
 

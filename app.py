@@ -1,9 +1,15 @@
 from flask import *
 import sqltools
 import time
+import tempfile
+import os
+
+
+tmpdir = tempfile.TemporaryDirectory()
 
 app = Flask(__name__)
 
+# print(app.config['UPLOAD_FOLDER'])
 
 @app.route("/")
 def show_all():
@@ -39,11 +45,26 @@ def delete_contact():
         sqltools.delete(request.json['msg'])
         return "yo yourself"
 
+@app.route("/uploadvcf", methods=['POST', 'GET'])
+def upload_vcf():
+    if request.method == 'POST':
+        vcfile = request.files['file']
+        print(vcfile.filename)
+        vcfile.save(os.path.join(tmpdir.name, vcfile.filename))
+        return redirect(url_for("import_vcf", filename=vcfile.filename))
+
+    return render_template("uploadvcf.html")
+
+@app.route("/importvcf", methods=['POST', 'GET'])
+def import_vcf():
+    vcffilename = request.args['filename']
+    proccesedvcf = sqltools.process_vcf(vcffilename)
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5001, debug=True)
 
 
 
 #todo implement upload vcf route
-
 

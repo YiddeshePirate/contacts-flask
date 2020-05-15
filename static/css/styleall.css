@@ -14,6 +14,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: left;
+    margin-top: 4px;
 }
 
 .content-box{
@@ -33,7 +34,7 @@ body {
   width: 130px;
   height: 20px;
   /*background: rgba(255, 213, 70, 0.4);*/
-  border: 2px solid rgba(222, 220, 201, 0.93);
+  border: 1px solid rgba(222, 220, 201, 0.93);
 }
 
 .empty-box {
@@ -50,7 +51,7 @@ body {
     width: 130px;
     height: 20px;
     /*background: rgba(255, 213, 70, 0.4);*/
-    border: 2px solid #444444;
+    border: 1px solid #444444;
 }
 
 

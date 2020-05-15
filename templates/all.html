@@ -44,8 +44,7 @@
         {% endfor %}
             <td id=roweditbutton{{loop.index}} class="edit-button" type="button" onclick="editclicked(this.id)">edit</td>
             <td id=rowsavebutton{{loop.index}} class="save-button" type="button" onclick="saveclicked(this.id)">save</td>
-            <td id=rowdeletebutton{{loop.index}} class="delete-button" type="button" onclick="deleteclicked(this.id)">delete</td>
-        <br>
+            <td id=rowdeletebutton{{loop.index}} class="delete-button" type="button" onclick="delete_contact(this.id)">delete</td>
     </tr>
     {% endfor %}
 </table>
