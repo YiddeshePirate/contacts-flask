@@ -22,6 +22,7 @@
           <li class="submenushowitem" id="{{i}}showitem"><label class="showcheckboxlabel" id="{{i}}showcheckboxlabel}}"><input checked type="checkbox" class="submenushowcheckbox" id="{{loop.index}}showcheckbox" onclick="checkbox_clicked(this)"></input>{{i}}</label></li>
           {% endfor %}
       </ul>
+  <li class="menuitem id="multibuttonmenuitem"><input id="multibutton" name=multibutton type="checkbox"><label for="multibutton" class="menulabel" id="multibuttonlabel">Multiple Select</label></li>
   </li>
 </ul>
 <table id="completetable" class="grid-container">
@@ -35,6 +36,7 @@
     {% for i in rows %}
     {% set rowloop = loop %}
     <tr id=row{{loop.index}} class="contact-row">
+        <td class="tableitemcheckbox"><input class="rowcheckbox" id=checkboxrow{{loop.index}} type="checkbox"></td>
         {% for j in i %}
         {% if j != None %}
             <td contenteditable="false" id=row{{rowloop.index}}col{{loop.index}} class="actual-box-content">{{j}}</td>

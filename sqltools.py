@@ -1,5 +1,5 @@
-from vcftools import process_vcf
 import sqlite3
+from vcftools import process_vcf
 
 
 connection = sqlite3.connect("contacts.db", check_same_thread=False)
@@ -186,6 +186,14 @@ def merge_temp(table='Contacts'):
               """
     print(command)
     crsr.execute(command)
+
+    cmd1 = """
+            DELETE FROM Contacts where Personid not in 
+            (SELECT min(PersonID) FROM Contacts group by Displayname, Cell, Home)
+            """
+
+    crsr.execute(command)
+    crsr.execute(cmd1)
     connection.commit()
 
 def clear_all(table='Contacts'):

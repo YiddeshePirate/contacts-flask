@@ -7,8 +7,5 @@ function merge_vcf() {
     xhttp.send();
     xhttp.addEventListener('load', function () {
         window.location.replace('/')
-        // if (this.status == 400){
-        //     window.location.replace('all')
-        // }
     });
 }

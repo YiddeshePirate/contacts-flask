@@ -14,7 +14,6 @@ function hide_col(boxid) {
 
 window.onload = function(){
 
-
     var elements = document.querySelectorAll("[id^=row1col]");
     newvals = []
     for (i=1; i<elements.length; ++i){
@@ -28,9 +27,11 @@ window.onload = function(){
             hide_col("3showcheckbox")
             hide_col("9showcheckbox")
             return
-        };
-        editclicked('roweditbutton1');
+        }else{
+            console.log('fuck me still editing it');
+        }
     }
+    editclicked('roweditbutton1');
 }
 
 function show_col(boxid) {
@@ -57,3 +58,39 @@ function checkbox_clicked(box) {
     }
 }
 
+
+
+var checkbox = document.querySelector("input[name=multibutton]");
+
+checkbox.addEventListener( 'change', function() {
+    if(this.checked) {
+        console.log('multi checked')
+        document.getElementById('multibuttonlabel').style.background = "rgba(41,94,0,0.45)";
+        var menuitems = document.querySelectorAll('p[class=menulabel')
+        var lenn = menuitems.length
+        for (var i = 0; i < lenn; i++){
+            menuitems[i].style.display = "none";
+        }
+
+        var rowcheckboxess = document.getElementsByClassName('tableitemcheckbox')
+        var lenn = rowcheckboxess.length
+        for (var i = 0; i < lenn; i++){
+            rowcheckboxess[i].style.display = "grid";
+        }
+
+    } else {
+        document.getElementById('multibuttonlabel').style.background = "initial";
+        console.log('multi unchecked')
+        var menuitems = document.querySelectorAll('p[class=menulabel')
+        var lenn = menuitems.length
+        for (var i = 0; i < lenn; i++){
+            menuitems[i].style.display = "block";
+        }
+
+        var rowcheckboxess = document.getElementsByClassName('tableitemcheckbox')
+        var lenn = rowcheckboxess.length
+        for (var i = 0; i < lenn; i++){
+            rowcheckboxess[i].style.display = "none";
+        }
+    }
+});

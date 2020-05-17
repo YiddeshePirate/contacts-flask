@@ -17,6 +17,14 @@ body {
     margin-top: 4px;
 }
 
+
+/*.rowcheckbox{*/
+/*    display: none;*/
+/*}*/
+
+.tableitemcheckbox{
+    display: none;
+}
 .content-box{
     width: 200px;
 }
@@ -232,4 +240,9 @@ body {
 }
 
 .submenushowcheckbox{
+}
+
+
+#multibutton{
+    display: none;
 }
