@@ -164,7 +164,7 @@ body {
 .menuitem:hover .submenu {display: block}
 
 .menulabel {
-    border: 1px solid #ffffff;
+  border: 1px solid #ffffff;
   display: block;
   color: white;
   text-align: center;
@@ -173,6 +173,15 @@ body {
   text-decoration: none;
 }
 
+.multilabel {
+    border: 1px solid #ffffff;
+    display: none;
+    color: white;
+    text-align: center;
+    padding: 10px 10px;
+    margin: 4px;
+    text-decoration: none;
+}
 
 
 .submenu{

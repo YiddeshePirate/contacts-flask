@@ -66,31 +66,26 @@ checkbox.addEventListener( 'change', function() {
     if(this.checked) {
         console.log('multi checked')
         document.getElementById('multibuttonlabel').style.background = "rgba(41,94,0,0.45)";
-        var menuitems = document.querySelectorAll('p[class=menulabel')
-        var lenn = menuitems.length
-        for (var i = 0; i < lenn; i++){
-            menuitems[i].style.display = "none";
-        }
 
-        var rowcheckboxess = document.getElementsByClassName('tableitemcheckbox')
-        var lenn = rowcheckboxess.length
-        for (var i = 0; i < lenn; i++){
-            rowcheckboxess[i].style.display = "grid";
-        }
+        changequerydisplay('p[class=menulabel', 'none');
+        changeclassdisplay('tableitemcheckbox', 'grid');
+        changeclassdisplay('multilabel', 'grid');
 
     } else {
-        document.getElementById('multibuttonlabel').style.background = "initial";
-        console.log('multi unchecked')
-        var menuitems = document.querySelectorAll('p[class=menulabel')
-        var lenn = menuitems.length
-        for (var i = 0; i < lenn; i++){
-            menuitems[i].style.display = "block";
-        }
 
-        var rowcheckboxess = document.getElementsByClassName('tableitemcheckbox')
-        var lenn = rowcheckboxess.length
-        for (var i = 0; i < lenn; i++){
-            rowcheckboxess[i].style.display = "none";
-        }
+        document.getElementById('multibuttonlabel').style.background = "initial";
+
+        changequerydisplay('p[class=menulabel', 'block');
+        changeclassdisplay('tableitemcheckbox', 'none');
+        changeclassdisplay('multilabel', 'none');
     }
 });
+
+
+function changeclassdisplay(classname, displayarg){
+    [].forEach.call(document.getElementsByClassName(classname), function (el){el.style.display = displayarg})
+}
+
+function changequerydisplay(queryarg, displayarg){
+    [].forEach.call(document.querySelectorAll(queryarg), function (el){el.style.display = displayarg})
+}

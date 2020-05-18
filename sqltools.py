@@ -201,7 +201,10 @@ def clear_all(table='Contacts'):
     crsr.execute(command)
     connection.commit()
 
-if __name__ == '__main__':
-    clear_all()
 
-
+def set_group(array, cursor=crsr, table='Contacts'):
+    ids = ", ".join(array)
+    cmd = f"""
+        UPDATE {table} SET Category = 300
+        WHERE[PersonID] IN ({ids})
+        """

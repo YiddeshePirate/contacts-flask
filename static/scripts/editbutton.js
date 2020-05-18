@@ -124,3 +124,21 @@ function changedisplay(base, rownum, newdisplay){
     var button = document.getElementById(button);
     button.style.display = newdisplay;
 }
+
+
+function deletemultiple(){
+    var inputs = document.querySelectorAll("input[id^=checkboxrow]");
+
+    for(var i = 0; i < inputs.length; i++) {
+        if (inputs[i].checked == true){
+            console.log(inputs[i].id);
+            delete_contact(inputs[i].id, 'Contacts');
+        }
+}
+}
+
+
+function addmultipletogroup(){
+    var inputs = document.querySelectorAll("input[id^=checkboxrow]");
+}
+
